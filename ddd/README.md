@@ -3,6 +3,10 @@ Es la evolución de las arquitecturas convencionales de 1 o 3 capas.
 
 ![Arquitectura](guides/architecture.png)
 
+__Las flechas indican el flujo de la información__, no la dependencia.
+Es importante conseguir la __IoC__ usando técnicas como la __inyección
+de dependencias.__
+
 Estas capas se divide en las siguientes:
 
 1. __Presentación:__ No sufre cambios con la arquitectura de 3 capas.
@@ -12,7 +16,7 @@ Estas capas se divide en las siguientes:
                         de infraestructura, ya que no se va a tratar
                         con datos sino con todo lo relacionado a la 
                         infraestructura de nuestro sistema (Datos, 
-                        Framework, Logging, etc).
+                        Framework, Logging, etc.).
 
 
 __NOTA.__ La capa de lógica de negocio se dividió en 2 que seria la capa de
@@ -44,3 +48,30 @@ aplicación y la capa de dominio.
   específico.
 * Se compone de entidades de dominio y servicios de dominio.
     1. __Entidades de dominio.__
+        * Datos.
+        * Lógica.
+        * __NO__ son entidades de persistencia (__@Entity__ en 
+          Spring).
+    2. __Servicios de dominio.__
+        * Lógica de dominio que no se pueda asignar a una entidad
+          de dominio específica.
+        * Siguen los principios del DDD.
+        * __@Service__ en Spring.
+
+### Capa de infraestructura.
+* __Persistencia.__
+  * Objetos de ORMs (@Entity etc).
+  * Repositorios.
+* __Detalles del Framework.__
+  * Clases de configuración.
+  * Arranque de la aplicación.
+* __Otros aspectos de infraestructura.__
+  * Logging.
+
+### ¡Importante!
+* Es importante que el __dominio sea lo más estable__ de nuestro
+  sistema.
+* Nunca debemos modificar nuestro dominio para adaptarlo al exterior,
+  como ejemplo DB.
+* En ese caso, lo apropiado es adaptar la capa de infraestructura.
+
