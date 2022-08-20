@@ -75,3 +75,21 @@ aplicación y la capa de dominio.
   como ejemplo DB.
 * En ese caso, lo apropiado es adaptar la capa de infraestructura.
 
+### Elementos del modelo de dominio
+
+![Modelo de dominio](guides/domain-model.png)
+
+* __Entidades.__
+  * Clases con datos y comportamiento.
+* __Value Objects.__
+  * Clases con simplemente datos.
+  * Sirven para representar de manera más clara los atributos de las
+    entidades.
+  * Deben ser __inmutables__.
+* __Aggregates.__
+  * Grupos de Entidades y Value Objects.
+  * Separan conceptos diferentes de nuestro dominio.
+
+Como normal general, la comunicación entre distintos aggregates se debe
+hacer __a través de la raíz__ de los mismos. Una raíz no puede acceder
+a otro elemento no raíz de un aggregate diferente.
